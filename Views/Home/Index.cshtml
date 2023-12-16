@@ -8,6 +8,14 @@
     <h1 class="display-4">Library of Amazing things</h1>    
 </div><br/>
 
+<form method="post" asp-action="Search" asp-controller="Home">
+    <div class="mb-3">
+        <label for="bookGenres" class="form-label">Genre</label>
+        <select asp-items="@ViewBag.Genres" name="GenreIds" multiple="multiple"></select>
+    </div>
+    <button type="submit">Search</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -28,7 +36,8 @@
                 <td>@String.Join(", ", book.Genres.Select(x => x.Name))</td>
                 <td>@book.AmountOfPages</td>
                 <td>@book.Published.ToString("MM/dd/yyyy")</td>
-                <td>@book.Author.Firstname @book.Author.Surname</td>
+                <td>@book.GetAuthorName()</td>
+                <td><a asp-action="AboutBook" asp-controller="Book" asp-route-id="@book.Id">Learn more</a></td>
                 <td><a asp-action="DeleteBook" asp-controller="Book" asp-route-id="@book.Id">Delete</a></td>
                 <td><a asp-action="UpdateBook" asp-controller="Book" asp-route-id="@book.Id">Update</a></td>
             </tr>

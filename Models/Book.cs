@@ -18,6 +18,15 @@ namespace LibraryProject.Models
 
         public virtual ICollection<Genre> Genres { get; set; } = new HashSet<Genre>();
 
+        public string GetAuthorName()
+        {
+            if (this.Author == null)
+            {
+                return string.Empty;
+            }
+
+            return $"{this.Author.Firstname} {this.Author.Surname}";
+        }
     }
 
 }

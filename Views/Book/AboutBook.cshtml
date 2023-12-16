@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "About Book";
+}
+
+@model Book 
+
+<div class="text-center">
+    <h1 class="display-4">About @Model.Titel</h1>
+    
+    <h4>Pages: @Model.AmountOfPages</h4>
+    <h4>Written by: @Model.GetAuthorName()</h4>
+</div>
+<br />

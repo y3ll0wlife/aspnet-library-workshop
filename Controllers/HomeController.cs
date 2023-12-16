@@ -2,8 +2,9 @@ using LibraryProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using LibraryProject.Model;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace LibraryProject.Controllers
 {
@@ -24,6 +25,35 @@ namespace LibraryProject.Controllers
                 .Include(x => x.Author)
                 .Include(x => x.Genres)
                 .ToList();
+
+            var genres = _context.Genres
+                .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
+                .ToList();
+
+            ViewBag.Genres = genres;
+
+            return View(books);
+        }
+
+        [HttpPost]
+        public IActionResult Search(List<int> genreIds)
+        {
+            var bookIds = _context.Books
+                .Include(x => x.Author)
+                .Include(x => x.Genres)
+                
+                .ToList();
+
+            var books = _context.Books
+                .Where(x => bookIds.Contains(x.Id))
+                .ToList();
+
+            var genres = _context.Genres
+                .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
+                .ToList();
+
+            ViewBag.Genres = genres;
+
             return View(books);
         }
 

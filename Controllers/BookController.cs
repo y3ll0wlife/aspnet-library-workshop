@@ -1,8 +1,6 @@
 ﻿using LibraryProject.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Net;
 using LibraryProject.Dto;
 using LibraryProject.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -101,6 +99,16 @@ namespace LibraryProject.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult AboutBook(int id)
+        {
+            var book = _context.Books
+                .Include(x => x.Author)
+                .First(x => x.Id == id);
+
+            return View(book);
         }
     }
 }

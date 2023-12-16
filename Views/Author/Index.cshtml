@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Authors";
+}
+
+@model List<Author>
+
+<div class="text-center">
+    <h1 class="display-4">Our amazing authors</h1>    
+</div><br/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>How many written books?</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var author in Model)
+        {
+            <tr>
+                <td>@author.Firstname @author.Surname</td>
+                <td>@author.Books.Count</td>
+                <td><a asp-action="AboutAuthor" asp-controller="Author" asp-route-id="@author.Id">Learn more</a></td>
+                <td><a asp-action="DeleteAuthor" asp-controller="Author" asp-route-id="@author.Id">Delete</a></td> 
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+

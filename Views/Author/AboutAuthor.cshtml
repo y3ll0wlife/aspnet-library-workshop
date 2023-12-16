@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "About Author";
+}
+
+@model Author 
+
+<div >
+    <h1 class="display-4">About @Model.Firstname @Model.Surname</h1>
+    <h4>Written @Model.Books.Count books</h4>
+</div>
+<br />
+
+<div class="container text-center">
+    <div class="row row-cols-3">
+        @foreach (var book in @Model.Books)
+        {
+            <div class="col">
+                <div class="card" style="width: 20em;">
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Titel (@book.AmountOfPages pages)</h5>
+                        <p class="card-text">@String.Join(", ", book.Genres.Select(x => x.Name))</p>
+                        <a class="btn btn-primary" asp-action="AboutBook" asp-controller="Book" asp-route-id="@book.Id">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
