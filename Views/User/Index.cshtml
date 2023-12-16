@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "User";
+}
+
+@model User
+
+<div class="text-center">
+    <h1 class="display-4">Welcome back @User.Identity.Name</h1>    
+    <h5>@User.Identity.AuthenticationType</h5>
+    @if (Model.Image != null)
+    {
+        <img src="@ViewBag.Image" width="250px" height="250px" />
+        <br/>
+    }
+    
+    <a asp-action="Update" asp-controller="User">Edit User</a>
+</div>
+
+<br/>
+

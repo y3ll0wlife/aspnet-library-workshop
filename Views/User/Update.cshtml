@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Update user";
+}
+
+@model User
+
+<div asp-validation-summary="All"></div>
+
+<form method="post" asp-action="UpdateUser" asp-controller="User" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="userId" class="form-label">User Id</label>
+        <input type="text" class="form-control" id="userId" value="@Model.Id" readonly="readonly" name="id">
+    </div>
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" value="@Model.UserName" name="username">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" value="@Model.PasswordHash" name="password">
+    </div>
+    <div class="mb-3">
+        <label for="profileImage" class="form-label">Profile Image</label>
+        <input type="file" class="form-control" id="profileImage" name="profileImage">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

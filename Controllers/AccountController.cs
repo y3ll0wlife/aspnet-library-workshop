@@ -26,7 +26,6 @@ namespace LibraryProject.Controllers
                 User user = new User();
                 user.UserName = register.Username;
                 var result = await _userManager.CreateAsync(user, register.Password);
-
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: true);
