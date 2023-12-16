@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Book>
+
+<div class="text-center">
+    <h1 class="display-4">Library of Amazing things</h1>    
+</div><br/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Titel</td>
+            <td>Genres</td>
+            <td>Amount of pages</td>
+            <td>Published</td>
+            <td>Author</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var book in Model)
+        {
+            <tr>
+                <td>@book.Titel</td>
+                <td>@String.Join(", ", book.Genres.Select(x => x.Name))</td>
+                <td>@book.AmountOfPages</td>
+                <td>@book.Published.ToString("MM/dd/yyyy")</td>
+                <td>@book.Author.Firstname @book.Author.Surname</td>
+                <td><a asp-action="DeleteBook" asp-controller="Book" asp-route-id="@book.Id">Delete</a></td>
+                <td><a asp-action="UpdateBook" asp-controller="Book" asp-route-id="@book.Id">Update</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<a asp-action="AddBook" asp-controller="Book">Add new book</a>

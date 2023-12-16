@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Update book";
+}
+
+@model Book
+
+<div asp-validation-summary="All"></div>
+
+<form method="post" asp-action="UpdateBook" asp-controller="Book">
+    <div class="mb-3">
+        <label for="bookId" class="form-label">Book Id</label>
+        <input type="text" class="form-control" id="bookId" value="@Model.Id" readonly="readonly" name="id">
+    </div>
+    <div class="mb-3">
+        <label for="bookTitle" class="form-label">Book Title</label>
+        <input type="text" class="form-control" id="bookTitle" value="@Model.Titel" name="title">
+    </div>
+    <div class="mb-3">
+        <label for="bookPages" class="form-label">Amount of Pages</label>
+        <input type="text" class="form-control" id="bookPages" value="@Model.AmountOfPages" name="AmountOfPages">
+    </div>
+    <div class="mb-3">
+        <label for="bookAuthor" class="form-label">Author</label>
+        <select asp-items="@ViewBag.Authors" name="AuthorId"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

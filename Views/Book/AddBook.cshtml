@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Add Book";
+}
+
+
+<div asp-validation-summary="All"></div>
+
+<form method="post" asp-action="AddBook" asp-controller="Book">
+    <div class="mb-3">
+        <label for="bookTitle" class="form-label">Book Title</label>
+        <input type="text" class="form-control" id="bookTitle" name="title">
+    </div>
+    <div class="mb-3">
+        <label for="bookPages" class="form-label">Amount of Pages</label>
+        <input type="text" class="form-control" id="bookPages" name="AmountOfPages">
+    </div>
+    <div class="mb-3">
+        <label for="bookAuthor" class="form-label">Author</label>
+        <select asp-items="@ViewBag.Authors" name="AuthorId"></select>
+    </div>
+    <div class="mb-3">
+        <label for="bookAuthor" class="form-label">Genre</label>
+        <select asp-items="@ViewBag.Genres" name="GenreIds" multiple="multiple"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
