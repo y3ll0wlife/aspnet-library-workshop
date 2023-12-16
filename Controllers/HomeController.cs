@@ -38,14 +38,9 @@ namespace LibraryProject.Controllers
         [HttpPost]
         public IActionResult Search(List<int> genreIds)
         {
-            var bookIds = _context.Books
+            var bookList = _context.Books
                 .Include(x => x.Author)
                 .Include(x => x.Genres)
-                
-                .ToList();
-
-            var books = _context.Books
-                .Where(x => bookIds.Contains(x.Id))
                 .ToList();
 
             var genres = _context.Genres
@@ -54,6 +49,24 @@ namespace LibraryProject.Controllers
 
             ViewBag.Genres = genres;
 
+            if (genreIds.Count == 0)
+            {
+                return View(bookList);
+            }
+
+            var books = new List<Book>();
+            foreach (var book in bookList)
+            {
+                var bookGenres = book.Genres.Select(x => x.Id).ToList();
+
+                if (!genreIds.Intersect(bookGenres).Any())
+                {
+                    continue;
+                }
+
+                books.Add(book);
+            }
+            
             return View(books);
         }
 
