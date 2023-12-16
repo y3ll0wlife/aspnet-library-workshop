@@ -46,4 +46,10 @@
 </table>
 <br />
 
-<a asp-action="AddBook" asp-controller="Book">Add new book</a>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <a asp-action="Login" asp-controller="Account">Sign in</a>
+} else {
+    <a asp-action="AddBook" asp-controller="Book">Add new book</a>
+}

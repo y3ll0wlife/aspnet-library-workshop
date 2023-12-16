@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryProject.Dto;
 using LibraryProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibraryProject.Controllers
@@ -16,6 +17,7 @@ namespace LibraryProject.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult DeleteBook(int id)
         {

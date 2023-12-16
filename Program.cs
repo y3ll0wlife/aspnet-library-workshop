@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using LibraryProject.Model;
+using Microsoft.AspNetCore.Identity;
+using LibraryProject.Models;
 
 namespace LibraryProject
 {
@@ -14,6 +16,11 @@ namespace LibraryProject
             builder.Services.AddDbContext<LibraryContext>(
                 opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LibraryDatabase"))
             );
+            builder.Services
+                .AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<LibraryContext>()
+                .AddDefaultTokenProviders();
+
 
             var app = builder.Build();
 
