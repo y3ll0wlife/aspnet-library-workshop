@@ -21,7 +21,11 @@ namespace LibraryProject.Controllers
             var dbUser = _context.Users
                 .Include(x => x.Image)
                 .First(x => x.Id == user.Id);
-
+            
+            if (dbUser.Image == null)
+            {
+                return View(dbUser); 
+            }
             string base64 = Convert.ToBase64String(dbUser.Image.Blob);
             ViewBag.Image = $"data:image/png;base64,{base64}";
 
